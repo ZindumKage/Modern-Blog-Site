@@ -39,41 +39,59 @@ const CreateEditPostPage: React.FC = () => {
 
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <div className="bg-white rounded-lg shadow-md p-8">
-        <h1 className="text-3xl font-bold text-gray-800 mb-6">{postId ? 'Edit Post' : 'Create New Post'}</h1>
-        {error && <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">{error}</div>}
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">Title</label>
-            <input
-              id="title"
-              type="text"
-              required
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div>
-            <label htmlFor="content" className="block text-sm font-medium text-gray-700 mb-2">Content</label>
-            <textarea
-              id="content"
-              required
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              rows={12}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
-            />
-          </div>
-          <div className="flex space-x-4">
-            <button type="submit" className="bg-blue-600 text-white px-6 py-2 rounded-md hover:bg-blue-700">
-              {postId ? 'Update Post' : 'Create Post'}
-            </button>
-            <a href="/" className="bg-gray-300 text-gray-700 px-6 py-2 rounded-md hover:bg-gray-400">Cancel</a>
-          </div>
-        </form>
+  <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8">
+    <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+      {postId ? 'Edit Post' : 'Create New Post'}
+    </h1>
+
+    {error && (
+      <div className="bg-red-100 dark:bg-red-200 border border-red-400 dark:border-red-600 text-red-700 dark:text-red-800 px-4 py-3 rounded mb-4">
+        {error}
       </div>
-    </div>
+    )}
+
+    <form onSubmit={handleSubmit} className="space-y-6">
+      <div>
+        <label htmlFor="title" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Title</label>
+        <input
+          id="title"
+          type="text"
+          required
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="content" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Content</label>
+        <textarea
+          id="content"
+          required
+          value={content}
+          onChange={(e) => setContent(e.target.value)}
+          rows={12}
+          className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md bg-white dark:bg-gray-700 text-gray-800 dark:text-gray-100 focus:ring-blue-500 focus:border-blue-500"
+        />
+      </div>
+
+      <div className="flex space-x-4">
+        <button
+          type="submit"
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-md"
+        >
+          {postId ? 'Update Post' : 'Create Post'}
+        </button>
+        <a
+          href="/"
+          className="bg-gray-300 dark:bg-gray-600 text-gray-700 dark:text-gray-200 px-6 py-2 rounded-md hover:bg-gray-400 dark:hover:bg-gray-500"
+        >
+          Cancel
+        </a>
+      </div>
+    </form>
+  </div>
+</div>
   );
 };
 

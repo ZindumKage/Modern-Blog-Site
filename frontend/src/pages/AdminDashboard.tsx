@@ -41,21 +41,21 @@ const AdminDashboard: React.FC = () => {
     }
   };
 
-  if (loading) return <div className="p-8 text-center text-gray-500">Loading dashboard...</div>;
-  if (error) return <div className="p-8 text-center text-red-600">{error}</div>;
+  if (loading) return <div className="p-8 text-center text-gray-500 dark:text-gray-300">Loading dashboard...</div>;
+  if (error) return <div className="p-8 text-center text-red-600 dark:text-red-400">{error}</div>;
 
   return (
-    <div className="p-8">
-      <h1 className="text-2xl font-bold mb-4">Admin Dashboard</h1>
+    <div className="p-8 bg-gray-50 dark:bg-gray-900 min-h-screen">
+      <h1 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Admin Dashboard</h1>
 
       <section className="mb-8">
-        <h2 className="font-semibold">Users</h2>
+        <h2 className="font-semibold text-gray-700 dark:text-gray-200">Users</h2>
         {users.length === 0 ? (
-          <p className="mt-4 text-gray-500">No users found.</p>
+          <p className="mt-4 text-gray-500 dark:text-gray-400">No users found.</p>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
             {users.map(u => (
-              <div key={u._id} className="p-4 border rounded">
+              <div key={u._id} className="p-4 border border-gray-300 dark:border-gray-700 rounded bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100">
                 {u.username} — {u.email}
               </div>
             ))}
@@ -64,27 +64,30 @@ const AdminDashboard: React.FC = () => {
       </section>
 
       <section>
-        <h2 className="font-semibold">Posts</h2>
+        <h2 className="font-semibold text-gray-700 dark:text-gray-200">Posts</h2>
         {posts.length === 0 ? (
-          <p className="mt-4 text-gray-500">No posts found.</p>
+          <p className="mt-4 text-gray-500 dark:text-gray-400">No posts found.</p>
         ) : (
           <div className="space-y-4 mt-4">
             {posts.map(p => (
-              <div key={p._id} className="p-4 border rounded flex justify-between items-center">
+              <div
+                key={p._id}
+                className="p-4 border border-gray-300 dark:border-gray-700 rounded flex justify-between items-center bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+              >
                 <div>
                   <div className="font-medium">{p.title}</div>
-                  <div className="text-sm text-gray-500">By {p.author.username}</div>
+                  <div className="text-sm text-gray-500 dark:text-gray-400">By {p.author.username}</div>
                 </div>
                 <div className="flex items-center">
                   <button
-                    className="text-red-600 mr-4"
+                    className="text-red-600 dark:text-red-400 mr-4 hover:text-red-800 dark:hover:text-red-600"
                     onClick={() => deletePost(p._id)}
                   >
                     Delete
                   </button>
                   <Link
                     to={`/post/${p._id}`}
-                    className="text-blue-600 hover:text-blue-800"
+                    className="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300"
                   >
                     View
                   </Link>

@@ -23,7 +23,7 @@ const HomePage: React.FC = () => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen">
+      <div className="flex justify-center items-center min-h-screen text-gray-600 dark:text-gray-300">
         Loading...
       </div>
     );
@@ -31,9 +31,11 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-      <h1 className="text-4xl font-bold text-gray-800 mb-8">Latest Posts</h1>
+      <h1 className="text-4xl font-bold text-gray-800 dark:text-gray-100 mb-8">
+        Latest Posts
+      </h1>
       {posts.length === 0 ? (
-        <p className="text-center text-gray-600 mt-8">
+        <p className="text-center text-gray-600 dark:text-gray-300 mt-8">
           No posts yet. Be the first to create one!
         </p>
       ) : (

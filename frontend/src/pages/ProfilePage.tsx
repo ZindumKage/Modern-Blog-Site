@@ -59,7 +59,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
     } catch (err: unknown) {
       console.error("Failed to update profile", err);
       if (err instanceof Error)
-      setUpdateError(err.message || "Failed to update profile");
+        setUpdateError(err.message || "Failed to update profile");
     } finally {
       setUpdating(false);
     }
@@ -86,7 +86,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* User Info */}
-      <div className="bg-white rounded-lg shadow-md p-8 mb-8">
+      <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-8 mb-8">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="w-20 h-20 bg-blue-600 rounded-full flex items-center justify-center text-white text-3xl font-bold">
@@ -95,40 +95,51 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
             <div>
               {!isEditing ? (
                 <>
-                  <h1 className="text-3xl font-bold text-gray-800">{userProfile.username}</h1>
-                  <p className="text-gray-600">{userProfile.email}</p>
-                  <p className="text-sm text-gray-500 mt-1">
-                    Member since {new Date(userProfile.createdAt).toLocaleDateString()}
+                  <h1 className="text-3xl font-bold text-gray-800 dark:text-gray-100">
+                    {userProfile.username}
+                  </h1>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {userProfile.email}
+                  </p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                    Member since{" "}
+                    {new Date(userProfile.createdAt).toLocaleDateString()}
                   </p>
                 </>
               ) : (
                 <form onSubmit={handleUpdateProfile} className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Username</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                      Username
+                    </label>
                     <input
                       type="text"
                       value={username}
                       onChange={(e) => setUsername(e.target.value)}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">Email</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-200">
+                      Email
+                    </label>
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-blue-500 focus:border-blue-500"
+                      className="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-gray-100"
                     />
                   </div>
                   {updateError && (
-                    <p className="text-red-600 text-sm">{updateError}</p>
+                    <p className="text-red-600 dark:text-red-400 text-sm">
+                      {updateError}
+                    </p>
                   )}
                   <div className="flex space-x-2">
                     <button
                       type="submit"
                       disabled={updating}
-                      className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
+                      className="bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-700 dark:hover:bg-blue-600"
                     >
                       {updating ? "Updating..." : "Save"}
                     </button>
@@ -139,7 +150,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
                         setUsername(userProfile.username);
                         setEmail(userProfile.email);
                       }}
-                      className="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400"
+                      className="bg-gray-300 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded hover:bg-gray-400 dark:hover:bg-gray-600"
                     >
                       Cancel
                     </button>
@@ -151,7 +162,7 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
           {isCurrentUser && !isEditing && (
             <button
               onClick={() => setIsEditing(true)}
-              className="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300"
+              className="bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 px-4 py-2 rounded hover:bg-gray-300 dark:hover:bg-gray-600"
             >
               Edit Profile
             </button>
@@ -160,11 +171,13 @@ const ProfilePage: React.FC<ProfilePageProps> = ({ userId }) => {
       </div>
 
       {/* User Posts */}
-      <h2 className="text-2xl font-bold text-gray-800 mb-6">
+      <h2 className="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
         Posts by {userProfile.username}
       </h2>
       {posts.length === 0 ? (
-        <p className="text-center text-gray-600">No posts yet.</p>
+        <p className="text-center text-gray-600 dark:text-gray-300">
+          No posts yet.
+        </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {posts.map((post) => (
